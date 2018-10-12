@@ -13,7 +13,8 @@
             (package-refresh-contents)
             (package-install package))))
  '(
-   zenburn-theme        
+   zenburn-theme
+   color-theme-sanityinc-tomorrow
    ycmd                 
    flycheck             
    flycheck-ycmd
@@ -49,7 +50,8 @@
    company-web
    company-statistics
    exec-path-from-shell
-   fzf))
+   fzf
+   markdown-mode))
 
 (load "flycheck-swift3")
 

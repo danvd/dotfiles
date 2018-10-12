@@ -23,8 +23,8 @@
   (exec-path-from-shell-copy-envs
    '("PATH")))
 
-(load-theme 'zenburn t)
-
+;; (load-theme 'zenburn t)
+(load-theme 'sanityinc-tomorrow-night t)
 (desktop-save-mode 1)
 
 (show-paren-mode 1)
@@ -260,11 +260,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   (quote
-    ("e11569fd7e31321a33358ee4b232c2d3cf05caccd90f896e1df6cab228191109" default)))
+   '("06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "e11569fd7e31321a33358ee4b232c2d3cf05caccd90f896e1df6cab228191109" default))
  '(package-selected-packages
-   (quote
-    (yaml-mode rainbow-identifiers rjsx-mode company-tern tern ac-js2 xref-js2 js2-refactor skewer-mode js2-mode ycm modern-cpp-font-lock opencl-mode clang-format flx-ido zenburn-theme projectile ## klere-theme))))
+   '(rainbow-identifiers rjsx-mode company-tern tern ac-js2 xref-js2 js2-refactor skewer-mode js2-mode ycm modern-cpp-font-lock opencl-mode clang-format flx-ido zenburn-theme projectile ## klere-theme)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
