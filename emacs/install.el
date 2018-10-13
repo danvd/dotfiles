@@ -3,8 +3,6 @@
              '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 (add-to-list 'load-path "~/.emacs.d/ext_pkgs/")
-(package-initialize)
-
 
 (mapc
  (lambda (package)
