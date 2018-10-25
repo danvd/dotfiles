@@ -29,7 +29,7 @@
 
 (show-paren-mode 1)
 (global-hl-line-mode +1)
-(set-face-background 'hl-line "#444444")
+(set-face-background 'hl-line "#333333")
 
 (require 'rtags)
 ;; (rtags-start-process-unless-running)
