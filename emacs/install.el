@@ -50,7 +50,8 @@
    company-statistics
    exec-path-from-shell
    fzf
-   markdown-mode))
+   markdown-mode
+   dtrt-indent))
 
 (load "flycheck-swift3")
 
