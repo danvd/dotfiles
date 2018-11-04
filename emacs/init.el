@@ -120,7 +120,6 @@
 (setq web-mode-script-padding 1)
 
 (require 'company-web-html)
-(require 'company-statistics)
 
 (defun my-web-mode-hook ()
   "Hook for `web-mode'."
@@ -255,7 +254,7 @@
     ("06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "e11569fd7e31321a33358ee4b232c2d3cf05caccd90f896e1df6cab228191109" default)))
  '(package-selected-packages
    (quote
-    (eldoc-eval dtrt-indent rainbow-identifiers rjsx-mode company-tern tern ac-js2 xref-js2 js2-refactor skewer-mode js2-mode ycm modern-cpp-font-lock opencl-mode clang-format flx-ido ## klere-theme))))
+    (prompt-text promise eldoc-eval dtrt-indent rainbow-identifiers rjsx-mode company-tern tern ac-js2 xref-js2 js2-refactor skewer-mode js2-mode ycm modern-cpp-font-lock opencl-mode clang-format flx-ido ## klere-theme))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
