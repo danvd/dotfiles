@@ -2,8 +2,6 @@
 (require 'package)
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.milkbox.net/packages/") t)
-(add-to-list 'load-path "~/.emacs.d/lisp/")
-(add-to-list 'load-path "~/.emacs.d/ext_pkgs/")
 
 (mapc
  (lambda (package)
@@ -14,27 +12,27 @@
  '(
    zenburn-theme
    color-theme-sanityinc-tomorrow
-   flycheck             
+   flycheck
    flycheck-ycmd
    company-ycmd
-   eldoc                
-   opencl-mode          
-   modern-cpp-font-lock 
-   flx-ido              
+   eldoc
+   opencl-mode
+   modern-cpp-font-lock
+   flx-ido
    rtags
    eldoc
    projectile
    projectile-ripgrep
-   clang-format         
-   cmake-mode           
-   js2-mode             
+   clang-format
+   cmake-mode
+   js2-mode
    js2-refactor
    xref-js2
    company-tern
    tern
    js-format
    ag
-   magit                
+   magit
    autopair
    rjsx-mode
    skewer-mode
@@ -42,7 +40,6 @@
    ivy-rtags
    ivy-xref
    xcode-project
-   swift-mode
    rainbow-identifiers
    add-node-modules-path
    web-mode
@@ -51,6 +48,4 @@
    exec-path-from-shell
    fzf
    markdown-mode))
-
-(load "flycheck-swift3")
 

@@ -155,17 +155,6 @@
 (require 'modern-cpp-font-lock)
 (modern-c++-font-lock-global-mode t)
 
-(require 'swift-mode)
-(require 'xcode-project)
-
-(require 'flycheck-swift3) ; Not necessary if using ELPA package
-(with-eval-after-load 'flycheck
-    (add-hook 'flycheck-mode-hook #'flycheck-swift3-setup))
-
-;; (require 'company-sourcekit)
-;; (setq sourcekit-available-ports '(8081))
-;; (add-to-list 'company-backends 'company-sourcekit)
-
 (require 'flx-ido)
 (ido-mode 1)
 (ido-everywhere 1)
@@ -174,10 +163,6 @@
 (setq ido-enable-flex-matching t)
 (setq ido-use-faces nil)
 
-(projectile-global-mode)
-(setq projectile-enable-caching t)
-(setq projectile-completion-system 'ivy)
-(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 (rtags-enable-standard-keybindings)
 
 (define-key c-mode-base-map (kbd "M-.") 'rtags-find-symbol-at-point)
@@ -264,7 +249,7 @@
     ("06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "e11569fd7e31321a33358ee4b232c2d3cf05caccd90f896e1df6cab228191109" default)))
  '(package-selected-packages
    (quote
-    (eldoc-eval dtrt-indent rainbow-identifiers rjsx-mode company-tern tern ac-js2 xref-js2 js2-refactor skewer-mode js2-mode ycm modern-cpp-font-lock opencl-mode clang-format flx-ido zenburn-theme projectile ## klere-theme))))
+    (eldoc-eval dtrt-indent rainbow-identifiers rjsx-mode company-tern tern ac-js2 xref-js2 js2-refactor skewer-mode js2-mode ycm modern-cpp-font-lock opencl-mode clang-format flx-ido zenburn-theme ## klere-theme))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
