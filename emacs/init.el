@@ -228,8 +228,6 @@
 (require 'magit)
 (global-set-key (kbd "C-x g") 'magit-status)
 
-(setq gdb-many-windows 1)
-
 (global-set-key (kbd "M-v") '(lambda nil (interactive) (condition-case nil
                                                              (scroll-down) (beginning-of-buffer (goto-char (point-min))))))
 (global-set-key (kbd "C-v") '(lambda nil (interactive) (condition-case nil
