@@ -1,30 +1,23 @@
-(c-add-style "ft_style"
-	     '("gnu"
+(c-add-style "STYLE NAME HERE"
+	     '("ft_style"
 	       (c-basic-offset . 4)	; Guessed value
 	       (c-offsets-alist
-		(access-label . 0)	; Guessed value
 		(arglist-cont . 0)	; Guessed value
 		(arglist-intro . +)	; Guessed value
 		(block-close . 0)	; Guessed value
-		(brace-entry-open . 0)	; Guessed value
-		(class-close . 0)	; Guessed value
 		(defun-block-intro . +)	; Guessed value
 		(defun-close . 0)	; Guessed value
-		(inclass . +)		; Guessed value
 		(inline-close . 0)	; Guessed value
-		(member-init-cont . -)	; Guessed value
-		(member-init-intro . +)	; Guessed value
 		(statement . 0)		; Guessed value
 		(statement-block-intro . +) ; Guessed value
-		(statement-cont . +)	; Guessed value
-		(substatement . +)	; Guessed value
-		(topmost-intro . 0)	; Guessed value
-		(topmost-intro-cont . 0) ; Guessed value
+		(topmost-intro . 0)	    ; Guessed value
+		(access-label . 0)
 		(annotation-top-cont . 0)
 		(annotation-var-cont . +)
 		(arglist-close . c-lineup-close-paren)
 		(arglist-cont-nonempty . c-lineup-arglist)
 		(block-open . 0)
+		(brace-entry-open . 0)
 		(brace-list-close . 0)
 		(brace-list-entry . c-lineup-under-anchor)
 		(brace-list-intro . +)
@@ -32,6 +25,7 @@
 		(c . c-lineup-C-comments)
 		(case-label . 0)
 		(catch-clause . 0)
+		(class-close . 0)
 		(class-open . 0)
 		(comment-intro . c-lineup-comment)
 		(composition-close . 0)
@@ -46,6 +40,7 @@
 		(extern-lang-open . 0)
 		(friend . 0)
 		(func-decl-cont . +)
+		(inclass . +)
 		(incomposition . +)
 		(inexpr-class . +)
 		(inexpr-statement . +)
@@ -60,6 +55,8 @@
 		(knr-argdecl-intro . +)
 		(label . 2)
 		(lambda-intro-cont . +)
+		(member-init-cont . -)
+		(member-init-intro . +)
 		(module-close . 0)
 		(module-open . 0)
 		(namespace-close . 0)
@@ -70,9 +67,11 @@
 				   [0])
 		(statement-case-intro . +)
 		(statement-case-open . 0)
+		(statement-cont . +)
 		(stream-op . c-lineup-streamop)
 		(string . -1000)
+		(substatement . +)
 		(substatement-label . 2)
 		(substatement-open . +)
-		(template-args-cont c-lineup-template-args +))))
-(setq c-default-style "ft_style")
+		(template-args-cont c-lineup-template-args +)
+		(topmost-intro-cont . 0))))

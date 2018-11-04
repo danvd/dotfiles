@@ -14,14 +14,15 @@
  '(
    zenburn-theme
    color-theme-sanityinc-tomorrow
-   ycmd                 
    flycheck             
    flycheck-ycmd
+   company-ycmd
    eldoc                
    opencl-mode          
    modern-cpp-font-lock 
    flx-ido              
-   rtags                
+   rtags
+   eldoc
    projectile
    projectile-ripgrep
    clang-format         
@@ -35,7 +36,6 @@
    ag
    magit                
    autopair
-   company-ycmd
    rjsx-mode
    skewer-mode
    ivy
@@ -50,8 +50,7 @@
    company-statistics
    exec-path-from-shell
    fzf
-   markdown-mode
-   dtrt-indent))
+   markdown-mode))
 
 (load "flycheck-swift3")
 

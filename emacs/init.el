@@ -31,11 +31,6 @@
 (global-hl-line-mode +1)
 (set-face-background 'hl-line "#333333")
 
-(add-hook 'c-mode-common-hook 
-  (lambda()
-    (require 'dtrt-indent)
-    (dtrt-indent-mode t)))
-
 (require 'rtags)
 ;; (rtags-start-process-unless-running)
 (setq rtags-display-result-backend 'ivy)
@@ -202,7 +197,6 @@
 (require 'ycmd-eldoc)
 (add-hook 'ycmd-mode-hook 'ycmd-eldoc-setup)
 
-(require 'flycheck-ycmd)
 (flycheck-ycmd-setup)
 
 ;; (setq rtags-autostart-diagnostics t)
@@ -213,6 +207,7 @@
 
 (global-flycheck-mode)
 
+'(flycheck-highlighting-mode (quote lines))
 (setq flycheck-indication-mode nil)
 
 (require 'clang-format)
@@ -269,7 +264,7 @@
     ("06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "e11569fd7e31321a33358ee4b232c2d3cf05caccd90f896e1df6cab228191109" default)))
  '(package-selected-packages
    (quote
-    (dtrt-indent rainbow-identifiers rjsx-mode company-tern tern ac-js2 xref-js2 js2-refactor skewer-mode js2-mode ycm modern-cpp-font-lock opencl-mode clang-format flx-ido zenburn-theme projectile ## klere-theme))))
+    (eldoc-eval dtrt-indent rainbow-identifiers rjsx-mode company-tern tern ac-js2 xref-js2 js2-refactor skewer-mode js2-mode ycm modern-cpp-font-lock opencl-mode clang-format flx-ido zenburn-theme projectile ## klere-theme))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
