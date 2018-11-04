@@ -10,7 +10,6 @@
             (package-refresh-contents)
             (package-install package))))
  '(
-   zenburn-theme
    color-theme-sanityinc-tomorrow
    flycheck
    flycheck-ycmd
@@ -21,8 +20,6 @@
    flx-ido
    rtags
    eldoc
-   projectile
-   projectile-ripgrep
    clang-format
    cmake-mode
    js2-mode
@@ -31,11 +28,8 @@
    company-tern
    tern
    js-format
-   ag
    magit
    autopair
-   rjsx-mode
-   skewer-mode
    ivy
    ivy-rtags
    ivy-xref
@@ -44,7 +38,6 @@
    add-node-modules-path
    web-mode
    company-web
-   company-statistics
    exec-path-from-shell
    fzf
    markdown-mode))
