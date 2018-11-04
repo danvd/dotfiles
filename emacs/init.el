@@ -238,6 +238,8 @@
                                                              (scroll-down) (beginning-of-buffer (goto-char (point-min))))))
 (global-set-key (kbd "<next>") '(lambda nil (interactive) (condition-case nil
                                                              (scroll-up) (end-of-buffer (goto-char (point-max))))))
+(global-set-key (kbd "C-c o") 'fzf)
+(global-set-key (kbd "C-c p") 'fzf-git)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
