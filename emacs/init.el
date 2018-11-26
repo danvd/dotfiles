@@ -200,8 +200,8 @@
 
 (setq clang-format-style-option "file")
 
-(add-hook 'c-mode-common-hook
-          (lambda () (add-hook 'before-save-hook 'clang-format-buffer nil 'local)))
+;; (add-hook 'c-mode-common-hook
+;;           (lambda () (add-hook 'before-save-hook 'clang-format-buffer nil 'local)))
 
 
 (defconst user-init-dir
