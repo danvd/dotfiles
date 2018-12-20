@@ -40,5 +40,6 @@
    company-web
    exec-path-from-shell
    fzf
-   markdown-mode))
+   markdown-mode
+   prettier-js))
 

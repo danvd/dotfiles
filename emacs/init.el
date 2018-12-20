@@ -50,7 +50,7 @@
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 ;; (add-to-list 'auto-mode-alist '("\\.jsx\\'" . js2-mode))
 
-(require 'rjsx-mode)
+;; (require 'rjsx-mode)
 
 ;; (add-hook 'js2-mode-hook 'skewer-mode)
 ;; (add-hook 'css-mode-hook 'skewer-css-mode)
@@ -80,7 +80,9 @@
 (add-hook 'js2-mode-hook (lambda ()
                            (tern-mode)
                            (company-mode)))
-                           
+
+
+
 ;; Disable completion keybindings, as we use xref-js2 instead
 ;;(define-key tern-mode-keymap (kbd "M-.") nil)
 ;;(define-key tern-mode-keymap (kbd "M-,") nil)
