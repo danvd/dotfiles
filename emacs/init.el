@@ -65,6 +65,10 @@
 (js2r-add-keybindings-with-prefix "C-c C-r")
 (define-key js2-mode-map (kbd "C-k") #'js2r-kill)
 
+(require 'prettier-js)
+
+(add-hook 'js2-mode-hook 'prettier-js-mode)
+
 ;; (require 'xref-js2)
 
 ;; js-mode (which js2 is based on) binds "M-." which conflicts with xref, so
@@ -229,6 +233,8 @@
 (require 'magit)
 (global-set-key (kbd "C-x g") 'magit-status)
 
+(elpy-enable)
+
 (global-set-key (kbd "M-v") '(lambda nil (interactive) (condition-case nil
                                                              (scroll-down) (beginning-of-buffer (goto-char (point-min))))))
 (global-set-key (kbd "C-v") '(lambda nil (interactive) (condition-case nil
@@ -252,11 +258,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   (quote
-    ("06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "e11569fd7e31321a33358ee4b232c2d3cf05caccd90f896e1df6cab228191109" default)))
+   '("06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "e11569fd7e31321a33358ee4b232c2d3cf05caccd90f896e1df6cab228191109" default))
  '(package-selected-packages
-   (quote
-    (prompt-text promise eldoc-eval dtrt-indent rainbow-identifiers rjsx-mode company-tern tern ac-js2 xref-js2 js2-refactor skewer-mode js2-mode ycm modern-cpp-font-lock opencl-mode clang-format flx-ido ## klere-theme))))
+   '(prompt-text promise eldoc-eval dtrt-indent rainbow-identifiers rjsx-mode company-tern tern ac-js2 xref-js2 js2-refactor skewer-mode js2-mode ycm modern-cpp-font-lock opencl-mode clang-format flx-ido ## klere-theme)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

@@ -41,5 +41,6 @@
    exec-path-from-shell
    fzf
    markdown-mode
-   prettier-js))
+   prettier-js
+   elpy))
 
