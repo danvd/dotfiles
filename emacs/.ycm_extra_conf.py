@@ -34,9 +34,9 @@ import ycm_core
 
 default_flags = ['-x', 'objective-c++', '-Wall', '-Wextra', '-std=c++17']
 
-cpp_source_extensions = ['.cpp', '.cxx', '.cc', '.c', '.m', '.mm']
+cpp_source_extensions = ['.cpp', '.cxx', '.cc', '.c', '.m', '.mm', '.cu']
 
-header_file_extensions = ['.h', '.H', '.hxx', '.hpp', '.hh']
+header_file_extensions = ['.h', '.H', '.hxx', '.hpp', '.hh', '.cuh']
 
 completion_database = []
 
