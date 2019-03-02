@@ -42,5 +42,6 @@
    fzf
    markdown-mode
    prettier-js
-   elpy))
+   elpy
+   cuda-mode))
 
