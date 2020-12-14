@@ -1,12 +1,3 @@
-if !exists('*ReloadVimrc')
-   fun! ReloadVimrc()
-       let save_cursor = getcurpos()
-       source $MYVIMRC
-       call setpos('.', save_cursor)
-   endfun
-endif
-autocmd! BufWritePost $MYVIMRC call ReloadVimrc()
-
 let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
 
 call plug#begin()
@@ -14,22 +5,19 @@ call plug#begin()
 Plug 'joshdick/onedark.vim' " Theme
 Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'} " intellisence
 Plug 'jackguo380/vim-lsp-cxx-highlight' " semantic highlight
-Plug 'rhysd/vim-clang-format' " formatting
-" FuzzyFinder (для быстрого поиска)
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " file search (install)
 Plug 'junegunn/fzf.vim' " file search
 Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'master', 'do': ':UpdateRemotePlugins' }
 Plug 'vim-airline/vim-airline' " status line
 Plug 'airblade/vim-gitgutter' " show diffs in left panel
-Plug 'lambdalisue/gina.vim' " git helper
 Plug 'liuchengxu/vista.vim' " symbols outline
 Plug 'dense-analysis/ale' " linter aggregator
 Plug 'MattesGroeger/vim-bookmarks' " bookmarks, mm for toggle, mn,mp - next/prev
-Plug 'voldikss/vim-floaterm' " terminal in floating window
 Plug 'derekwyatt/vim-fswitch' " swicth header/source
 Plug 'cdelledonne/vim-cmake' " CMake helper
 Plug 'haya14busa/is.vim' " search auto highlight remove
 Plug 'puremourning/vimspector' " Debug adapter
+Plug 'sbdchd/neoformat'
 call plug#end()
 
 let g:ale_linters = {
@@ -49,6 +37,11 @@ let g:airline#extensions#ale#enabled=1
 let g:lsp_cxx_hl_use_nvim_text_props= 1
 
 let g:cmake_generate_options=['-G', 'Ninja']
+
+augroup fmt
+  autocmd!
+  autocmd BufWritePre * undojoin | Neoformat
+augroup END
 
 set noshowmode
 
@@ -71,18 +64,12 @@ let g:lightline = {
 let g:airline_theme='onedark'
 let g:airline#extensions#tabline#enabled = 1
 
-let g:clang_format#auto_format=1
-let g:clang_format#auto_format_on_insert_leave=1
-
-nnoremap <Leader>f :<C-u>ClangFormat<CR>
-autocmd FileType c,cpp,objc ClangFormatAutoEnable
-
 " c++ syntax highlighting
 let g:cpp_class_scope_highlight = 1
 let g:cpp_member_variable_highlight = 1
 let g:cpp_class_decl_highlight = 1
 
-set updatetime=300
+set updatetime=250
 set shortmess+=c
 set number
 set cinoptions='4'
@@ -202,7 +189,7 @@ nmap <leader><F3> :<C-u>CocCommand fzf-preview.ProjectGrep<Space>
 nmap <silent> <leader><F6> :CocCommand fzf-preview.GitActions<CR>
 nmap <silent> <F7> :CMakeGenerate<CR>:CMakeBuild<CR>
 
-nmap <silent> <leader>F12 :VimspectorReset<CR>
+nmap <silent> <leader><F12> :VimspectorReset<CR>
 
 nmap <Leader>f [fzf-p]
 xmap <Leader>f [fzf-p]
@@ -223,13 +210,6 @@ nnoremap <silent> [fzf-p]q     :<C-u>CocCommand fzf-preview.QuickFix<CR>
 nnoremap <silent> [fzf-p]l     :<C-u>CocCommand fzf-preview.LocationList<CR>
 
 autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
-
-fun! LspCxxReenable()
-	LspCxxHighlightDisable
-	LspCxxHighlight
-endfun
-
-autocmd! BufWritePost *.cpp,*.h,*.hpp,*.c,*.cxx,*.cc,*.h call LspCxxReenable() 
 
 nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
 nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
