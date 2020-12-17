@@ -17,13 +17,16 @@ Plug 'derekwyatt/vim-fswitch' " swicth header/source
 Plug 'cdelledonne/vim-cmake' " CMake helper
 Plug 'haya14busa/is.vim' " search auto highlight remove
 Plug 'puremourning/vimspector' " Debug adapter
-Plug 'sbdchd/neoformat'
+Plug 'sbdchd/neoformat' " formatter
+Plug 'preservim/nerdcommenter' " comment lines
+Plug 'takac/vim-hardtime' " disable repeated keys presses
 call plug#end()
 
 let g:ale_linters = {
 \   'cpp': ['clangtidy'],
 \   'c': ['clangtidy'],
 \}
+let g:ale_fixers = ['clangtidy']
 let g:ale_cpp_clangtidy_checks = ['clang-diagnostic-*','clang-analyzer-*','-*','bugprone*','modernize*','performance*','-modernize-pass-by-value','-modernize-use-trailing-return-type','-modernize-use-auto','-modernize-use-using']
 let g:ale_cpp_clangtidy_executable = 'clang-tidy'
 let g:ale_c_parse_compile_commands=0
@@ -40,7 +43,7 @@ let g:cmake_generate_options=['-G', 'Ninja']
 
 augroup fmt
   autocmd!
-  autocmd BufWritePre * undojoin | Neoformat
+  autocmd BufWritePre,InsertLeave * undojoin | Neoformat
 augroup END
 
 set noshowmode
@@ -72,8 +75,14 @@ let g:cpp_class_decl_highlight = 1
 set updatetime=250
 set shortmess+=c
 set number
+set relativenumber
 set cinoptions='4'
 set cindent
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set ignorecase
+set smartcase
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
 if has("patch-8.1.1564")
@@ -185,8 +194,8 @@ nmap <silent> <F1> :CocCommand fzf-preview.FromResources project_mru project<CR>
 nmap <silent> <F2> :CocCommand explorer<CR>
 nmap <silent> <F3> :CocCommand fzf-preview.VistaBufferCtags <CR>
 nmap <silent> <F4>  :<C-u>FSHere<CR>
-nmap <leader><F3> :<C-u>CocCommand fzf-preview.ProjectGrep<Space>
-nmap <silent> <leader><F6> :CocCommand fzf-preview.GitActions<CR>
+nmap <silent> \ :Rg<CR>
+nmap <silent> <F3> :CocCommand fzf-preview.GitActions<CR>
 nmap <silent> <F7> :CMakeGenerate<CR>:CMakeBuild<CR>
 
 nmap <silent> <leader><F12> :VimspectorReset<CR>
@@ -218,4 +227,5 @@ inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float
 vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
 vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 
+let g:hardtime_default_on = 1
 
