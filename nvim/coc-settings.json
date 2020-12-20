@@ -1,24 +1,13 @@
 {
-    "languageserver": {
-        "ccls": {
-		"enable": false,
-            "command": "ccls",
-            "filetypes": ["c", "cpp", "objc", "objcpp"],
-            "rootPatterns": [".ccls", "compile_commands.json", ".vim/", ".git/", ".hg/"],
-            "initializationOptions": {
-                "cache": {
-                    "directory": "/tmp/ccls"
-                },
-	       // This will re-index the file on buffer change which is definitely a performance hit. See if it works for you
-               "index": {
-                 "onChange": true
-               },
-     
-                "highlight": { "lsRanges" : true }
-            }
-        }
-    },
-
-    "clangd.enabled": true,
-    "clangd.semanticHighlighting": true
+  "clangd.enabled": true,
+  "clangd.semanticHighlighting": true,
+  "clangd.arguments": [
+    "--clang-tidy",
+    "--clang-tidy-checks=clang-diagnostic-*,clang-analyzer-*,-*,bugprone*,modernize*,performance*,-modernize-pass-by-value,-modernize-use-trailing-return-type,-modernize-use-auto,-modernize-use-using",
+    "--pch-storage=memory",
+    "-j=4",
+    "--background-index",
+    "--cross-file-rename",
+    "--completion-parse=always"
+  ]
 }

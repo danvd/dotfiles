@@ -6,45 +6,26 @@ Plug 'joshdick/onedark.vim' " Theme
 Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'} " intellisence
 Plug 'jackguo380/vim-lsp-cxx-highlight' " semantic highlight
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " file search (install)
-Plug 'junegunn/fzf.vim' " file search
-Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'master', 'do': ':UpdateRemotePlugins' }
 Plug 'vim-airline/vim-airline' " status line
 Plug 'airblade/vim-gitgutter' " show diffs in left panel
 Plug 'liuchengxu/vista.vim' " symbols outline
-Plug 'dense-analysis/ale' " linter aggregator
 Plug 'MattesGroeger/vim-bookmarks' " bookmarks, mm for toggle, mn,mp - next/prev
 Plug 'derekwyatt/vim-fswitch' " swicth header/source
 Plug 'cdelledonne/vim-cmake' " CMake helper
 Plug 'haya14busa/is.vim' " search auto highlight remove
 Plug 'puremourning/vimspector' " Debug adapter
-Plug 'sbdchd/neoformat' " formatter
 Plug 'preservim/nerdcommenter' " comment lines
 Plug 'takac/vim-hardtime' " disable repeated keys presses
+Plug 'tpope/vim-fugitive' " git integration
 call plug#end()
 
-let g:ale_linters = {
-\   'cpp': ['clangtidy'],
-\   'c': ['clangtidy'],
-\}
-let g:ale_fixers = ['clangtidy']
-let g:ale_cpp_clangtidy_checks = ['clang-diagnostic-*','clang-analyzer-*','-*','bugprone*','modernize*','performance*','-modernize-pass-by-value','-modernize-use-trailing-return-type','-modernize-use-auto','-modernize-use-using']
-let g:ale_cpp_clangtidy_executable = 'clang-tidy'
-let g:ale_c_parse_compile_commands=0
-let g:ale_cpp_clangtidy_extra_options = '--extra-arg-before=-DSDL_DISABLE_ANALYZE_MACROS'
-let g:ale_cpp_clangtidy_options = '--use-color'
-let g:ale_set_balloons=1
-let g:ale_linters_explicit=1
-let g:ale_disable_lsp=1
-let g:airline#extensions#ale#enabled=1
-
-let g:lsp_cxx_hl_use_nvim_text_props= 1
+if (has("nvim"))
+    let g:lsp_cxx_hl_use_nvim_text_props = 1
+else
+    let g:lsp_cxx_hl_use_text_props = 1
+endif
 
 let g:cmake_generate_options=['-G', 'Ninja']
-
-augroup fmt
-  autocmd!
-  autocmd BufWritePre,InsertLeave * undojoin | Neoformat
-augroup END
 
 set noshowmode
 
@@ -72,6 +53,8 @@ let g:cpp_class_scope_highlight = 1
 let g:cpp_member_variable_highlight = 1
 let g:cpp_class_decl_highlight = 1
 
+set incsearch
+set hlsearch
 set updatetime=250
 set shortmess+=c
 set number
@@ -117,6 +100,17 @@ endif
 " format on enter, <cr> could be remapped by other vim plugin
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" Formatting selected code.
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+" Add `:Format` command to format current buffer.
+command! -nargs=0 Format :call CocAction('format')
+
+autocmd BufWritePre,InsertLeave * Format
+
+
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
@@ -196,7 +190,7 @@ nmap <silent> <F3> :CocCommand fzf-preview.VistaBufferCtags <CR>
 nmap <silent> <F4>  :<C-u>FSHere<CR>
 nmap <silent> \ :Rg<CR>
 nmap <silent> <F3> :CocCommand fzf-preview.GitActions<CR>
-nmap <silent> <F7> :CMakeGenerate<CR>:CMakeBuild<CR>
+nmap <silent> <F7> :wa<CR>:CMakeGenerate<CR>:CMakeBuild<CR>
 
 nmap <silent> <leader><F12> :VimspectorReset<CR>
 
