@@ -16,7 +16,7 @@ Plug 'haya14busa/is.vim' " search auto highlight remove
 Plug 'puremourning/vimspector' " Debug adapter
 Plug 'preservim/nerdcommenter' " comment lines
 Plug 'takac/vim-hardtime' " disable repeated keys presses
-Plug 'tpope/vim-fugitive' " git integration
+Plug 'lambdalisue/gina.vim' " git integration
 call plug#end()
 
 if (has("nvim"))
@@ -186,7 +186,7 @@ endfunction
 nmap <silent> <F1> :CocCommand fzf-preview.FromResources project_mru project<CR>
 
 nmap <silent> <F2> :CocCommand explorer<CR>
-nmap <silent> <F3> :CocCommand fzf-preview.VistaBufferCtags <CR>
+nmap <silent> <F8> :CocCommand fzf-preview.VistaBufferCtags <CR>
 nmap <silent> <F4>  :<C-u>FSHere<CR>
 nmap <silent> \ :Rg<CR>
 nmap <silent> <F3> :CocCommand fzf-preview.GitActions<CR>
