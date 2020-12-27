@@ -1,4 +1,6 @@
 let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
+ let g:cmake_generate_options=['-G', 'Ninja']
+
 
 call plug#begin()
 
@@ -16,7 +18,9 @@ Plug 'haya14busa/is.vim' " search auto highlight remove
 Plug 'puremourning/vimspector' " Debug adapter
 Plug 'preservim/nerdcommenter' " comment lines
 Plug 'takac/vim-hardtime' " disable repeated keys presses
-Plug 'lambdalisue/gina.vim' " git integration
+Plug 'tpope/vim-fugitive' " git integration
+Plug 'mg979/vim-visual-multi' " multi-cursors
+Plug 'ryanoasis/vim-devicons' " font icons (+ nerd font needed)
 call plug#end()
 
 if (has("nvim"))
@@ -25,7 +29,6 @@ else
     let g:lsp_cxx_hl_use_text_props = 1
 endif
 
-let g:cmake_generate_options=['-G', 'Ninja']
 
 set noshowmode
 
@@ -190,7 +193,7 @@ nmap <silent> <F8> :CocCommand fzf-preview.VistaBufferCtags <CR>
 nmap <silent> <F4>  :<C-u>FSHere<CR>
 nmap <silent> \ :Rg<CR>
 nmap <silent> <F3> :CocCommand fzf-preview.GitActions<CR>
-nmap <silent> <F7> :wa<CR>:CMakeGenerate<CR>:CMakeBuild<CR>
+nmap <silent> <F7> :wa<CR>:CMakeGenerate -DCMAKE_EXPORT_COMPILE_COMMANDS=ON<CR>:CMakeBuild<CR>
 
 nmap <silent> <leader><F12> :VimspectorReset<CR>
 
@@ -222,4 +225,5 @@ vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(
 vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 
 let g:hardtime_default_on = 1
+let g:hardtime_allow_different_key = 1
 
