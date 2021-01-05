@@ -5,9 +5,11 @@
     "--clang-tidy",
     "--clang-tidy-checks=clang-diagnostic-*,clang-analyzer-*,-*,bugprone*,modernize*,performance*,-modernize-pass-by-value,-modernize-use-trailing-return-type,-modernize-use-auto,-modernize-use-using",
     "--pch-storage=memory",
-    "-j=4",
+    "-j=6",
     "--background-index",
     "--cross-file-rename",
-    "--completion-parse=always"
+    "--completion-parse=auto",
+    "--index",
+    "--completion-style=detailed"
   ]
 }

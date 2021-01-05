@@ -8,16 +8,13 @@ Plug 'joshdick/onedark.vim' " Theme
 Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'} " intellisence
 Plug 'jackguo380/vim-lsp-cxx-highlight' " semantic highlight
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " file search (install)
-Plug 'vim-airline/vim-airline' " status line
+Plug 'liuchengxu/eleline.vim' " status line
 Plug 'airblade/vim-gitgutter' " show diffs in left panel
-Plug 'liuchengxu/vista.vim' " symbols outline
 Plug 'MattesGroeger/vim-bookmarks' " bookmarks, mm for toggle, mn,mp - next/prev
-Plug 'derekwyatt/vim-fswitch' " swicth header/source
 Plug 'cdelledonne/vim-cmake' " CMake helper
 Plug 'haya14busa/is.vim' " search auto highlight remove
 Plug 'puremourning/vimspector' " Debug adapter
 Plug 'preservim/nerdcommenter' " comment lines
-Plug 'takac/vim-hardtime' " disable repeated keys presses
 Plug 'tpope/vim-fugitive' " git integration
 Plug 'mg979/vim-visual-multi' " multi-cursors
 Plug 'ryanoasis/vim-devicons' " font icons (+ nerd font needed)
@@ -29,8 +26,9 @@ else
     let g:lsp_cxx_hl_use_text_props = 1
 endif
 
-
+set laststatus=2
 set noshowmode
+let g:eleline_powerline_fonts = 1
 
 if (has("nvim"))
     "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
@@ -48,8 +46,9 @@ colorscheme onedark
 let g:lightline = {
       \ 'colorscheme': 'onedark',
       \ }
-let g:airline_theme='onedark'
-let g:airline#extensions#tabline#enabled = 1
+" let g:airline_theme='onedark'
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline_powerline_fonts = 1
 
 " c++ syntax highlighting
 let g:cpp_class_scope_highlight = 1
@@ -77,6 +76,25 @@ if has("patch-8.1.1564")
 else
   set signcolumn=yes
 endif
+
+set backup
+if has('persistent_undo')
+  set undofile	" keep an undo file (undo changes after closing)
+endif
+
+augroup vimStartup
+    au!
+
+    " When editing a file, always jump to the last known cursor position.
+    " Don't do it when the position is invalid, when inside an event handler
+    " (happens when dropping a file on gvim) and for a commit message (it's
+    " likely a different one than last time).
+    autocmd BufReadPost *
+      \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
+      \ |   exe "normal! g`\""
+      \ | endif
+
+augroup END
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
@@ -176,6 +194,9 @@ function! s:show_documentation()
   endif
 endfunction
 
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
 augroup fzf_preview
   autocmd!
   autocmd User fzf_preview#initialized call s:fzf_preview_settings()
@@ -189,11 +210,11 @@ endfunction
 nmap <silent> <F1> :CocCommand fzf-preview.FromResources project_mru project<CR>
 
 nmap <silent> <F2> :CocCommand explorer<CR>
-nmap <silent> <F8> :CocCommand fzf-preview.VistaBufferCtags <CR>
-nmap <silent> <F4>  :<C-u>FSHere<CR>
-nmap <silent> \ :Rg<CR>
+nmap <silent> <F8> <space>o<CR>
+nmap <silent> <F4> :CocCommand clangd.switchSourceHeader<CR>
+nmap \ :CocCommand fzf-preview.ProjectGrep<Space>
 nmap <silent> <F3> :CocCommand fzf-preview.GitActions<CR>
-nmap <silent> <F7> :wa<CR>:CMakeGenerate -DCMAKE_EXPORT_COMPILE_COMMANDS=ON<CR>:CMakeBuild<CR>
+nmap <silent> <F7> :wa<CR> :CMakeBuild<CR>
 
 nmap <silent> <leader><F12> :VimspectorReset<CR>
 
@@ -215,7 +236,6 @@ nnoremap <silent> [fzf-p]t     :<C-u>CocCommand fzf-preview.BufferTags<CR>
 nnoremap <silent> [fzf-p]q     :<C-u>CocCommand fzf-preview.QuickFix<CR>
 nnoremap <silent> [fzf-p]l     :<C-u>CocCommand fzf-preview.LocationList<CR>
 
-autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
 
 nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
 nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
@@ -224,6 +244,4 @@ inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float
 vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
 vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 
-let g:hardtime_default_on = 1
-let g:hardtime_allow_different_key = 1
 
