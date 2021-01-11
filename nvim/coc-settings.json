@@ -3,13 +3,14 @@
   "clangd.semanticHighlighting": true,
   "clangd.arguments": [
     "--clang-tidy",
-    "--clang-tidy-checks=clang-diagnostic-*,clang-analyzer-*,-*,bugprone*,modernize*,performance*,-modernize-pass-by-value,-modernize-use-trailing-return-type,-modernize-use-auto,-modernize-use-using",
+    "--clang-tidy-checks=-*,bugprone*,modernize*,performance*,-modernize-use-trailing-return-type,-modernize-use-using,-modernize-avoid-c-arrays",
     "--pch-storage=memory",
     "-j=6",
     "--background-index",
     "--cross-file-rename",
     "--completion-parse=auto",
     "--index",
-    "--completion-style=detailed"
+    "--completion-style=detailed",
+    "--malloc-trim"
   ]
 }

@@ -1,6 +1,9 @@
 let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
- let g:cmake_generate_options=['-G', 'Ninja']
-
+let g:cmake_generate_options=['-G', 'Ninja']
+let g:ale_disable_lsp = 1
+let g:ale_sign_column_always = 1
+let g:ale_linters = {'cpp': ['clangtidy', 'cppcheck', 'flawfinder']}
+let g:ale_cpp_clangtidy_checks = ['-*','bugprone*','modernize*','performance*','-modernize-use-trailing-return-type','modernize-use-using','-modernize-avoid-c-arrays']
 
 call plug#begin()
 
@@ -16,7 +19,7 @@ Plug 'haya14busa/is.vim' " search auto highlight remove
 Plug 'puremourning/vimspector' " Debug adapter
 Plug 'preservim/nerdcommenter' " comment lines
 Plug 'tpope/vim-fugitive' " git integration
-Plug 'mg979/vim-visual-multi' " multi-cursors
+" Plug 'dense-analysis/ale' " linters
 Plug 'ryanoasis/vim-devicons' " font icons (+ nerd font needed)
 call plug#end()
 
@@ -25,6 +28,7 @@ if (has("nvim"))
 else
     let g:lsp_cxx_hl_use_text_props = 1
 endif
+
 
 set laststatus=2
 set noshowmode
@@ -129,9 +133,7 @@ nmap <leader>f  <Plug>(coc-format-selected)
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
 
-autocmd BufWritePre,InsertLeave * Format
-
-
+autocmd BufWritePre *.cpp,*.h,*.hh,*.cc,*.c,*.hpp,*.js Format
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
