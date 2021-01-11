@@ -1,0 +1,8 @@
+#!/bin/sh
+cmake \
+                -DCMAKE_TOOLCHAIN_FILE=/mnt/opt_ssd/Build/Toolchain/wincross/clang-cl-msvc.cmake \
+                -DMSVC_BASE=/mnt/opt_ssd/Build/Toolchain/wincross/winsdk/msvc/14.24.28314 \
+                -DWINSDK_BASE=/mnt/opt_ssd/Build/Toolchain/wincross/winsdk/winsdk \
+                -DWINSDK_VER=10.0.18362.0 \
+                $@
+
