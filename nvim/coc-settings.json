@@ -10,7 +10,6 @@
     "--cross-file-rename",
     "--completion-parse=auto",
     "--index",
-    "--completion-style=detailed",
-    "--malloc-trim"
+    "--completion-style=detailed"
   ]
 }

@@ -7,20 +7,19 @@ let g:ale_cpp_clangtidy_checks = ['-*','bugprone*','modernize*','performance*','
 
 call plug#begin()
 
-Plug 'joshdick/onedark.vim' " Theme
+Plug 'tomasiser/vim-code-dark' " Theme
 Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'} " intellisence
 Plug 'jackguo380/vim-lsp-cxx-highlight' " semantic highlight
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' } " file search (install)
-Plug 'liuchengxu/eleline.vim' " status line
 Plug 'airblade/vim-gitgutter' " show diffs in left panel
-Plug 'MattesGroeger/vim-bookmarks' " bookmarks, mm for toggle, mn,mp - next/prev
+" Plug 'MattesGroeger/vim-bookmarks' " bookmarks, mm for toggle, mn,mp - next/prev
 Plug 'cdelledonne/vim-cmake' " CMake helper
 Plug 'haya14busa/is.vim' " search auto highlight remove
-Plug 'puremourning/vimspector' " Debug adapter
+" Plug 'puremourning/vimspector' " Debug adapter
 Plug 'preservim/nerdcommenter' " comment lines
-Plug 'tpope/vim-fugitive' " git integration
-" Plug 'dense-analysis/ale' " linters
-Plug 'ryanoasis/vim-devicons' " font icons (+ nerd font needed)
+Plug 'kdheepak/lazygit.nvim' " call git ui 
+" Plug 'kyazdani42/nvim-web-devicons' " font icons (+ nerd font needed)
+Plug 'itchyny/lightline.vim'
 call plug#end()
 
 if (has("nvim"))
@@ -32,7 +31,6 @@ endif
 
 set laststatus=2
 set noshowmode
-let g:eleline_powerline_fonts = 1
 
 if (has("nvim"))
     "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
@@ -46,13 +44,7 @@ if (has("termguicolors"))
 endif
 
 syntax on
-colorscheme onedark
-let g:lightline = {
-      \ 'colorscheme': 'onedark',
-      \ }
-" let g:airline_theme='onedark'
-" let g:airline#extensions#tabline#enabled = 1
-" let g:airline_powerline_fonts = 1
+colorscheme codedark
 
 " c++ syntax highlighting
 let g:cpp_class_scope_highlight = 1
@@ -67,9 +59,6 @@ set number
 set relativenumber
 set cinoptions='4'
 set cindent
-set tabstop=4
-set shiftwidth=4
-set expandtab
 set ignorecase
 set smartcase
 " Always show the signcolumn, otherwise it would shift the text each time
@@ -133,7 +122,7 @@ nmap <leader>f  <Plug>(coc-format-selected)
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
 
-autocmd BufWritePre *.cpp,*.h,*.hh,*.cc,*.c,*.hpp,*.js Format
+autocmd User CMakeBuildSucceeded CMakeClose
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
@@ -147,7 +136,22 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " Add status line support, for integration with other plugin, checkout `:h coc-status`
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+" set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+function! CocCurrentFunction()
+    return get(b:, 'coc_current_function', '')
+endfunction
+
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'cocstatus': 'coc#status',
+      \   'currentfunction': 'CocCurrentFunction'
+      \ },
+      \ }
 
 
 " Applying codeAction to the selected region.
@@ -215,7 +219,7 @@ nmap <silent> <F2> :CocCommand explorer<CR>
 nmap <silent> <F8> <space>o<CR>
 nmap <silent> <F4> :CocCommand clangd.switchSourceHeader<CR>
 nmap \ :CocCommand fzf-preview.ProjectGrep<Space>
-nmap <silent> <F3> :CocCommand fzf-preview.GitActions<CR>
+nmap <silent> <F3> :LazyGit<CR>
 nmap <silent> <F7> :wa<CR> :CMakeBuild<CR>
 
 nmap <silent> <leader><F12> :VimspectorReset<CR>
@@ -246,4 +250,5 @@ inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float
 vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
 vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 
+set exrc
 
